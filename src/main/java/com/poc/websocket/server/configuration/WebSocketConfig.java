@@ -1,7 +1,7 @@
 package com.poc.websocket.server.configuration;
 
 import com.poc.websocket.server.handler.EmsHandler;
-import com.poc.websocket.server.handler.service.InstanceService;
+import com.poc.websocket.server.service.InstanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.poc.websocket.server.handler.service;
+package com.poc.websocket.server.service;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;

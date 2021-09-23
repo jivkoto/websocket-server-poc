@@ -1,6 +1,6 @@
 package com.poc.websocket.server.handler;
 
-import com.poc.websocket.server.handler.service.InstanceService;
+import com.poc.websocket.server.service.InstanceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.BinaryMessage;

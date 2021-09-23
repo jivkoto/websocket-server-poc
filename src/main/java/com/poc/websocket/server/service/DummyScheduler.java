@@ -1,4 +1,4 @@
-package com.poc.websocket.server.handler.service;
+package com.poc.websocket.server.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
