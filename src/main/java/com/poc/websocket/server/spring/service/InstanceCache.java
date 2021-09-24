@@ -1,4 +1,4 @@
-package com.poc.websocket.server.service;
+package com.poc.websocket.server.spring.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
