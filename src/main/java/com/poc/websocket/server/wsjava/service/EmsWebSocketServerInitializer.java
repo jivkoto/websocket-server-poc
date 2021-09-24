@@ -20,6 +20,6 @@ public class EmsWebSocketServerInitializer
     public void init()
     {
         log.info("Starting ems web socket server");
-        emsWebSocketServer.run();
+        emsWebSocketServer.start();
     }
 }
