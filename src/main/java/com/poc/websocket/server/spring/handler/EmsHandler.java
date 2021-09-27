@@ -1,6 +1,6 @@
 package com.poc.websocket.server.spring.handler;
 
-import com.poc.websocket.server.spring.service.InstanceService;
+import com.poc.websocket.server.spring.service.SpringWebSocketIstanceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.BinaryMessage;
@@ -14,7 +14,7 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 @Slf4j
 public class EmsHandler extends AbstractWebSocketHandler
 {
-    private final InstanceService instanceService;
+    private final SpringWebSocketIstanceService instanceService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception

@@ -1,4 +1,4 @@
-package com.poc.websocket.server.spring.configuration;
+package com.poc.websocket.server.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.poc.websocket.server.spring.service;
+package com.poc.websocket.server.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class DummyScheduler
+public class WebSocketSenderScheduler
 {
     private final InstanceService instanceService;
     private final InstanceCache instanceCache;
@@ -23,6 +23,7 @@ public class DummyScheduler
         if (!instanceIds.isEmpty())
         {
             String randomKey = instanceIds.iterator().next();
+            log.info("Will send message to instance:{} using instance type:{}", randomKey, instanceService.getType());
             instanceService.sendMessage(randomKey, "Hello world");
         }
     }

@@ -1,9 +1,9 @@
 package com.poc.websocket.server.spring.service;
 
 import com.google.gson.Gson;
+import com.poc.websocket.server.service.InstanceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,13 +13,13 @@ import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
-@Service
-public class InstanceService
+public class SpringWebSocketIstanceService implements InstanceService<WebSocketSession, TextMessage>
 {
-    private static final String IDENTIFIER_KEY = "identifier";
+    private final String TYPE = "SpringWebSocket";
 
-    private final InstanceCache instanceCache;
+    private final SpringWebSocketInstanceCache instanceCache;
 
+    @Override
     public void processMessage(WebSocketSession session, TextMessage message)
     {
         if (isSubscribeMessage(message))
@@ -28,11 +28,13 @@ public class InstanceService
         }
     }
 
+    @Override
     public void removeSession(WebSocketSession session)
     {
         instanceCache.removeSession(session);
     }
 
+    @Override
     public void sendMessage(String instance, String message)
     {
         WebSocketSession session = instanceCache.getSession(instance);
@@ -54,7 +56,7 @@ public class InstanceService
 
     private boolean isSubscribeMessage(TextMessage message)
     {
-        return (message.getPayload().contains("SUBSCRIBE"));
+        return (message.getPayload().contains(SUBSCRIBE_TYPE));
     }
 
     private void processAsSubscribeMessage(WebSocketSession session, TextMessage textMessage)
@@ -66,10 +68,16 @@ public class InstanceService
         if (identifier != null)
         {
             log.info("Processing subscription for identifier:{}", identifier);
-            instanceCache.addInstance("1", session);
+            instanceCache.addInstance(identifier, session);
         } else
         {
             log.error("Can't find identifier from subscription message:{}", message);
         }
+    }
+
+    @Override
+    public String getType()
+    {
+        return TYPE;
     }
 }

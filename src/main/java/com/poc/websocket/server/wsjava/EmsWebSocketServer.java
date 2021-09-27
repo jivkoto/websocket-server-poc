@@ -1,5 +1,6 @@
 package com.poc.websocket.server.wsjava;
 
+import com.poc.websocket.server.service.InstanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -11,9 +12,12 @@ import java.nio.ByteBuffer;
 @Slf4j
 public class EmsWebSocketServer extends WebSocketServer
 {
-    public EmsWebSocketServer(InetSocketAddress address)
+    private final InstanceService<WebSocket, String> instanceService;
+
+    public EmsWebSocketServer(InetSocketAddress address, InstanceService<WebSocket, String> instanceService)
     {
         super(address);
+        this.instanceService = instanceService;
     }
 
     @Override
@@ -26,12 +30,14 @@ public class EmsWebSocketServer extends WebSocketServer
     public void onClose(WebSocket webSocket, int i, String s, boolean b)
     {
         log.info("Closing:{}", webSocket);
+        instanceService.removeSession(webSocket);
     }
 
     @Override
     public void onMessage(WebSocket webSocket, String textMessage)
     {
         log.info("Text message:{} from connection:{}", textMessage, webSocket);
+        instanceService.processMessage(webSocket, textMessage);
     }
 
     @Override

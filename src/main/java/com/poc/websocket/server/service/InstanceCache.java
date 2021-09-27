@@ -1,8 +1,7 @@
-package com.poc.websocket.server.spring.service;
+package com.poc.websocket.server.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Optional;
 import java.util.Set;
@@ -10,21 +9,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @Slf4j
-public class InstanceCache
+public abstract class InstanceCache<T>
 {
-    private final ConcurrentHashMap<String, WebSocketSession> instances = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, T> instances = new ConcurrentHashMap<>();
 
-    public void addInstance(String instance, WebSocketSession session)
+    public void addInstance(String instance, T session)
     {
         instances.put(instance, session);
     }
 
-    public WebSocketSession getSession(String instance)
+    public T getSession(String instance)
     {
         return instances.get(instance);
     }
 
-    public void removeSession(WebSocketSession session)
+    public void removeSession(T session)
     {
         if (instances.containsValue(session))
         {

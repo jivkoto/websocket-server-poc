@@ -12,5 +12,4 @@ public class JavaWebSocketProperties
     private String enabled;
     private String host = "localhost";
     private int port = 8081;
-    private String url = "/ems";
 }
